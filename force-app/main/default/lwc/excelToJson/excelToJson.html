@@ -1,0 +1,21 @@
+<!--
+  @description       : 
+  @author            : agentgill
+  @group             : 
+  @last modified on  : 10-09-2021
+  @last modified by  : agentgill
+-->
+
+<template>
+    <lightning-card>
+        {recordId}
+        <lightning-file-upload
+            label="Upload Excel Document"
+            name="fileUploader"
+            accept={acceptedFormats}
+            onuploadfinished={handleUploadFinished}
+        >
+        </lightning-file-upload>
+        <lightning-button label="Fetch" name="Fetch" onclick={onClick}></lightning-button>
+    </lightning-card>
+</template>
