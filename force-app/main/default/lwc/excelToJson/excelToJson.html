@@ -1,21 +1,46 @@
 <!--
-  @description       : 
+  @description       : Excel to JSON
   @author            : agentgill
   @group             : 
-  @last modified on  : 10-09-2021
+  @last modified on  : 10-10-2021
   @last modified by  : agentgill
 -->
 
 <template>
+  <div class="slds-p-around_xx-small">
     <lightning-card>
-        {recordId}
-        <lightning-file-upload
-            label="Upload Excel Document"
-            name="fileUploader"
-            accept={acceptedFormats}
-            onuploadfinished={handleUploadFinished}
-        >
-        </lightning-file-upload>
-        <lightning-button label="Fetch" name="Fetch" onclick={onClick}></lightning-button>
+      <lightning-input type="url" label="Heroku App URL" value={defaultUrl}></lightning-input>
     </lightning-card>
+  </div>
+  <div class="slds-p-around_xx-small">
+    <lightning-card>
+      <div>
+        <lightning-input type="file" accept=".xlsx" label="Upload Excel Document" onchange={handleUploadFinished}>
+        </lightning-input>
+      </div>
+      <div>
+        <template if:true={fileData}>
+          <p>File Name: {fileData.filename}</p>
+          <p>Excel JSON: {excelJSON}</p>
+        </template>
+      </div>
+    </lightning-card>
+  </div>
+  <div class="slds-p-around_xx-small">
+    <lightning-card>
+      <div>
+        <lightning-button
+          class="slds-p-around_x-small"
+          label="Test Heroku"
+          name="Heroku"
+          onclick={onClick}
+        ></lightning-button>
+      </div>
+      <div>
+        <template if:true={testHeroku}>
+          <p class="slds-p-around_xx-small">{testHeroku}</p>
+        </template>
+      </div>
+    </lightning-card>
+  </div>
 </template>

@@ -2,45 +2,55 @@
  * @description       : ExcelToJson
  * @author            : agentgill
  * @group             :
- * @last modified on  : 10-09-2021
+ * @last modified on  : 10-10-2021
  * @last modified by  : agentgill
  **/
-import { LightningElement, track } from 'lwc';
+import { LightningElement } from 'lwc';
 
 export default class ExcelToJson extends LightningElement {
-    @track acceptedFormats = ['.xlsx'];
-    async handleUploadFinished(event) {
-        const uploadedFiles = event.detail.files;
-        const formData = new FormData();
-        if (uploadedFiles.length > 0) {
-            console.dir(uploadedFiles);
+  fileData;
+  excelJSON;
+  testHeroku;
+  defaultUrl = 'https://radiant-hamlet-82916.herokuapp.com';
 
-            formData.append('upload', uploadedFiles);
-        }
-        const QUERY_URL = 'https://radiant-hamlet-82916.herokuapp.com/upload';
-        const response = await fetch(QUERY_URL, {
-            method: 'POST',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: formData
-        });
-        console.dir(response);
-        const result = await response.json();
-        console.log(result);
-    }
-    async onClick(event) {
-        const QUERY_URL = 'https://radiant-hamlet-82916.herokuapp.com/hello';
-        console.log('Button Clicked' + event);
-        const response = await fetch(QUERY_URL, {
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-        console.dir(response);
-        const result = await response.json();
-        console.log(result);
-    }
+  handleUploadFinished(event) {
+    const file = event.target.files[0];
+    var reader = new FileReader();
+    reader.onload = () => {
+      var base64 = reader.result.split(',')[1];
+      this.fileData = {
+        filename: file.name,
+        base64: base64
+      };
+      console.log(this.fileData);
+    };
+    reader.readAsDataURL(file);
+    this.parseFile(file);
+  }
+
+  async parseFile(file) {
+    const QUERY_URL = this.defaultUrl + '/upload';
+    const formData = new FormData();
+    formData.append('upload', file);
+    const response = await fetch(QUERY_URL, {
+      method: 'POST',
+      mode: 'cors',
+      body: formData
+    });
+    console.dir(response);
+    const fileJSON = await response.json();
+    this.excelJSON = JSON.stringify(fileJSON.data.excel, null, 2);
+    console.dir('excelJSON:' + this.excelJSON);
+  }
+
+  async onClick() {
+    const QUERY_URL = this.defaultUrl + '/hello';
+    const response = await fetch(QUERY_URL, {
+      mode: 'cors'
+    });
+    console.dir(response);
+    const result = await response.json();
+    this.testHeroku = JSON.stringify(result);
+    console.log(result);
+  }
 }
