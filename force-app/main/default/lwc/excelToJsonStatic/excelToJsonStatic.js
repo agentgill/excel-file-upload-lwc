@@ -38,20 +38,30 @@ export default class ExcelToJsonStatic extends LightningElement {
       });
   }
 
-  async handleUploadFinished(event) {
-    const file = event.target.files[0];
-    let reader = new FileReader();
-    reader.onload = () => {
-      var base64 = reader.result.split(',')[1];
-      this.fileData = {
-        filename: file.name,
-        base64: base64
-      };
-      this.parseFile(this.fileData);
-      console.dir('fileData:' + JSON.stringify(this.fileData));
-    };
-    reader.readAsDataURL(file);
-  }
+  uploadFile(evt) {
+    console.log(evt);
+    let file;
 
-  async parseFile(data) {}
+    Promise.resolve(evt.target.files)
+      .then((files) => {
+        if (files.length !== 1) {
+          throw new Error(
+            'Error accessing file -- ' + (files.length === 0 ? 'No file received' : 'Multiple files received')
+          );
+        }
+
+        file = files[0];
+        return readAsBinaryString(file);
+      })
+      .then((blob) => {
+        let workbook = window.XLSX.read(blob, { type: 'binary' });
+        console.dir('workbook:' + JSON.stringify(workbook));
+        if (!workbook || !workbook.Workbook) {
+          throw new Error('Cannot read Excel File (incorrect file format?)');
+        }
+        if (workbook.SheetNames.length < 1) {
+          throw new Error('Excel file does not contain any sheets');
+        }
+      });
+  }
 }
