@@ -1,0 +1,34 @@
+<!--
+  @description       : Test Heroku 
+  @author            : agentgill
+  @group             : 
+  @last modified on  : 10-10-2021
+  @last modified by  : agentgill
+-->
+<template>
+  <div class="slds-p-around_xx-small">
+    <lightning-card>
+      <div>
+        <lightning-button
+          class="slds-p-around_x-small"
+          label="NO CORS"
+          name="Heroku"
+          onclick={onClickNoCORS}
+        ></lightning-button>
+      </div>
+      <div>
+        <lightning-button
+          class="slds-p-around_x-small"
+          label="With CORS"
+          name="Heroku"
+          onclick={onClickCORS}
+        ></lightning-button>
+      </div>
+      <div>
+        <template if:true={testHeroku}>
+          <p class="slds-p-around_xx-small">{testHeroku}</p>
+        </template>
+      </div>
+    </lightning-card>
+  </div>
+</template>

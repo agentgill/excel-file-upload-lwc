@@ -1,16 +1,28 @@
-# Excel File Upload and Parse to JSON
+# Excel File Upload
 
-# Salesforce DX Project: Next Steps
+Sample application for uploading and parsing Excel documents using "sheetjs" natively with LWC and an alternative solution using Heroku App for nodejs/express based parsing.
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+Note - You need to update any Heroku URLS to match your own Heroku Apps i.e. https://radiant-hamlet-82916.herokuapp.com
 
-## How Do You Plan to Deploy Your Changes?
+## Resources
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+- [SheetJS](https://sheetjs.com/)
+- [xlsx](https://www.npmjs.com/package/xlsx)
+- [Heroku](https://heroku.com/)
+- [SalesforceLabs - ExcelUpload](https://github.com/SalesforceLabs/ExcelUpload)
+- [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
 
-## Configure Your Salesforce DX Project
+## excelToJsonStatic LWC
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+Simple LWC with file upload which uses "sheetjs" static resource for parsng (based on ExcelUpload repo). Parses uploaded excel document and returns JSON.
+
+## excelToJson LWC
+
+Simple LWC with file upload and send to Heroku App based on Fetch API. POST to endpont on Hero for parsing and returns JSON response.
+
+## testHeroku LWC
+
+Simple LWC for testing callout to Heroku using Fetch API.
 
 ## Read All About It
 
