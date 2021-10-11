@@ -18,7 +18,7 @@ Simple LWC with file upload which uses "sheetjs" static resource for parsng (bas
 
 ## excelToJson LWC
 
-Simple LWC with file upload and send to Heroku App based on Fetch API. POST to endpont on Hero for parsing and returns JSON response.
+Simple LWC with file upload and send to Heroku App based on Fetch API. POST to endpont on Heroku for parsing and returns JSON response.
 
 ## testHeroku LWC
 
