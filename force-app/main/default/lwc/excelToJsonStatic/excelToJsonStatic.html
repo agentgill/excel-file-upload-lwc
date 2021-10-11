@@ -1,0 +1,21 @@
+<!--
+  @description       : 
+  @author            : agentgill
+  @group             : 
+  @last modified on  : 10-11-2021
+  @last modified by  : agentgill
+-->
+
+<template>
+  <lightning-card>
+    <div>
+      <lightning-input type="file" accept=".xlsx" label="Upload Excel Document" onchange={handleUploadFinished}>
+      </lightning-input>
+    </div>
+    <div>
+      <template if:true={fileData}>
+        <p>File Name: {fileData.filename}</p>
+      </template>
+    </div>
+  </lightning-card>
+</template>

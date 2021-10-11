@@ -2,7 +2,7 @@
  * @description       : ExcelToJson
  * @author            : agentgill
  * @group             :
- * @last modified on  : 10-10-2021
+ * @last modified on  : 10-11-2021
  * @last modified by  : agentgill
  **/
 import { LightningElement } from 'lwc';
@@ -32,6 +32,7 @@ export default class ExcelToJson extends LightningElement {
     const QUERY_URL = this.defaultUrl + '/upload';
     const formData = new FormData();
     formData.append('upload', file);
+
     const response = await fetch(QUERY_URL, {
       method: 'POST',
       mode: 'cors',
