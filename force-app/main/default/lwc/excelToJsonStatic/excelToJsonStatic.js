@@ -62,6 +62,8 @@ export default class ExcelToJsonStatic extends LightningElement {
         if (workbook.SheetNames.length < 1) {
           throw new Error('Excel file does not contain any sheets');
         }
+        let excelJSON = window.XLSX.utils.sheet_to_json(workbook.Sheets['Sheet1'], { header: 1 });
+        console.dir(JSON.stringify(excelJSON));
       });
   }
 }
