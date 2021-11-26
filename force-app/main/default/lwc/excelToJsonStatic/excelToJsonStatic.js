@@ -2,7 +2,7 @@
  * @description       : ExcelToJson Using Static Resource sheetjs
  * @author            : agentgill
  * @group             :
- * @last modified on  : 10-11-2021
+ * @last modified on  : 11-18-2021
  * @last modified by  : agentgill
  **/
 import { LightningElement } from 'lwc';
@@ -39,7 +39,7 @@ export default class ExcelToJsonStatic extends LightningElement {
   }
 
   uploadFile(evt) {
-    console.log(evt);
+    //console.log(evt);
     let file;
 
     Promise.resolve(evt.target.files)
@@ -55,7 +55,7 @@ export default class ExcelToJsonStatic extends LightningElement {
       })
       .then((blob) => {
         let workbook = window.XLSX.read(blob, { type: 'binary' });
-        console.dir('workbook:' + JSON.stringify(workbook));
+        //console.dir('workbook:' + JSON.stringify(workbook));
         if (!workbook || !workbook.Workbook) {
           throw new Error('Cannot read Excel File (incorrect file format?)');
         }
@@ -63,7 +63,7 @@ export default class ExcelToJsonStatic extends LightningElement {
           throw new Error('Excel file does not contain any sheets');
         }
         let excelJSON = window.XLSX.utils.sheet_to_json(workbook.Sheets['Sheet1'], { header: 1 });
-        console.dir(JSON.stringify(excelJSON));
+        console.dir(excelJSON);
       });
   }
 }
